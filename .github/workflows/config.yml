@@ -34,3 +34,4 @@ jobs:
         uses: matt-ball/newman-action@v1.0.4
         with:
             collection: Beneficiaries/Beneficiaries.postman_collection.json
+            environment: workspace.postman_globals.json
