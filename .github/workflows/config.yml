@@ -30,11 +30,11 @@ jobs:
         run: echo Hello, world!
 
       # Runs a set of commands using the runners shell
-     # - name: Beneficiaries
-      #  uses: matt-ball/newman-action@v1.0.4
-       # with:
-        #    collection: Beneficiaries/Beneficiaries.postman_collection.json
-         #   environment: workspace.postman_globals.json
+      - name: Beneficiaries
+        uses: matt-ball/newman-action@v1.0.4
+        with:
+            collection: Beneficiaries/Beneficiaries.postman_collection.json
+            environment: workspace.postman_globals.json
             
       # Runs a set of commands using the runners shell
       - name: Accounts
@@ -43,4 +43,8 @@ jobs:
             collection: Accounts/Accounts.postman_collection.json
             environment: workspace.postman_globals.json
             iterationData: Test data - csv. datasheets/AccountsDataSheet.csv
+            
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo sprwadzwenie czy dziala
 
