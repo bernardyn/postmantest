@@ -1,0 +1,3247 @@
+{
+	"info": {
+		"_postman_id": "e10e989d-047c-4781-aaec-10517564927c",
+		"name": "Accounts",
+		"description": "This document contails all the Internal APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26736578",
+		"_collection_link": "https://martian-trinity-780370.postman.co/workspace/88eb36be-d399-4e7b-990b-c00ac9932975/collection/26736578-e10e989d-047c-4781-aaec-10517564927c?action=share&creator=26736578&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "AccountsTests",
+			"item": [
+				{
+					"name": "Happy paths",
+					"item": [
+						{
+							"name": "Get a list of account products available",
+							"item": [
+								{
+									"name": "Get a list of account products available - 200 - OK",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 200 - OK - Get a list of account products available\", () => {\r",
+													"    pm.response.to.have.status(200);\r",
+													"    pm.response.to.have.status(\"OK\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object with list of account products available have all required keys\", () => {\r",
+													"    if (pm.response.status != \"OK\") {\r",
+													"        pm.expect.fail('The status is not 200! Check previous tests as this one requires the response to be an array!');\r",
+													"    }\r",
+													"    else {\r",
+													"        pm.expect(responseJson, 'Response object is NOT an array!').to.be.an('array');\r",
+													"        pm.expect(responseJson.length, 'Response object array is empty!').to.be.greaterThan(0)\r",
+													"        for (var i = 0; i < responseJson.length; i++) {\r",
+													"            pm.expect(responseJson[i]).to.be.an('object').that.has.all.keys('accountProductId', 'description');\r",
+													"        }\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object with list of account products available have right data types\", () => {\r",
+													"    if (pm.response.status != \"OK\") {\r",
+													"        pm.expect.fail('The status is not 200! Check previous tests as this one requires the response to be an array!');\r",
+													"    }\r",
+													"    else {\r",
+													"        pm.expect(responseJson, 'Response object is NOT an array!').to.be.an('array');\r",
+													"        pm.expect(responseJson.length, 'Response object array is empty!').to.be.greaterThan(0)\r",
+													"        for (var i = 0; i < responseJson.length; i++) {\r",
+													"            pm.expect(responseJson[i].accountProductId).to.be.a('string');\r",
+													"            pm.expect(responseJson[i].description).to.be.a('string');\r",
+													"        }\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that all id's object inside response are valid UUID\", () => {\r",
+													"    if (pm.response.status != \"OK\") {\r",
+													"        pm.expect.fail('The status is not 200! Check previous tests as this one requires the response to be an array!');\r",
+													"    } else {\r",
+													"        pm.expect(responseJson, 'Response object is NOT an array!').to.be.an('array');\r",
+													"        pm.expect(responseJson.length, 'Response object array is empty!').to.be.greaterThan(0)\r",
+													"        for (var i = 0; i < responseJson.length; i++) {\r",
+													"            pm.expect(responseJson[i].accountProductId).to.match(/^@?(?:[A-Za-z0-9\\-_]{4})*(?:[A-Za-z0-9\\-_]{2}==|[A-Za-z0-9-_]{3}=)?$/i);\r",
+													"        }\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/account-products?productId={{productId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"account-products"
+											],
+											"query": [
+												{
+													"key": "productId",
+													"value": "{{productId}}",
+													"description": "Only select terms which relate to the product with the specified id"
+												}
+											]
+										},
+										"description": "Get a list of account products available."
+									},
+									"response": [
+										{
+											"name": "ok",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products?productId=570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products"
+													],
+													"query": [
+														{
+															"key": "productId",
+															"value": "570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+															"description": "Only select terms which relate to the product with the specified id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  [\n    {\n      \"accountProductId\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n      \"description\": \"Personal Current Account\"\n    },\n    {\n      \"accountProductId\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n      \"description\": \"Personal Current Account\"\n    }\n  ],\n  [\n    {\n      \"accountProductId\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n      \"description\": \"Personal Current Account\"\n    },\n    {\n      \"accountProductId\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n      \"description\": \"Personal Current Account\"\n    }\n  ]\n]"
+										},
+										{
+											"name": "Invalid request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products?productId=570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products"
+													],
+													"query": [
+														{
+															"key": "productId",
+															"value": "570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+															"description": "Only select terms which relate to the product with the specified id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\",\n  \"messages\": [\n    {\n      \"message\": \"An account must have either a Business or Person associated with it.\"\n    },\n    {\n      \"message\": \"An account must have either a Business or Person associated with it.\"\n    }\n  ]\n}"
+										},
+										{
+											"name": "You are not authorized to perform this action.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products?productId=570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products"
+													],
+													"query": [
+														{
+															"key": "productId",
+															"value": "570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+															"description": "Only select terms which relate to the product with the specified id"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"You are not authorised to the specified resource.\",\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\"\n}"
+										},
+										{
+											"name": "Internal server error.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products?productId=570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products"
+													],
+													"query": [
+														{
+															"key": "productId",
+															"value": "570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+															"description": "Only select terms which relate to the product with the specified id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n  \"message\": \"Downstream server created an exception with ID \\\\\\\"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\\\\\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get the details of a specified product",
+							"item": [
+								{
+									"name": "Get the details of a specified product - 200 - OK",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 200 - OK - Get the details of a specified product\", () => {\r",
+													"    pm.response.to.have.status(200);\r",
+													"    pm.response.to.have.status(\"OK\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object with specified account product available have all required keys\", () => {\r",
+													"    pm.expect(responseJson).to.be.an('object').that.has.all.keys('accountProductId', 'description');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object with specified account product available have right data types\", () => {\r",
+													"    pm.expect(responseJson.accountProductId).to.be.a('string');\r",
+													"    pm.expect(responseJson.description).to.be.a('string');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that all id's object inside response are valid UUID\", () => {\r",
+													"    pm.expect(responseJson.accountProductId).to.match(/^@?(?:[A-Za-z0-9\\-_]{4})*(?:[A-Za-z0-9\\-_]{2}==|[A-Za-z0-9-_]{3}=)?$/i);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/account-products/{{AccountProductID}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"account-products",
+												"{{AccountProductID}}"
+											]
+										},
+										"description": "Get the details of a specified product."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products/:accountProductId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products",
+														":accountProductId"
+													],
+													"variable": [
+														{
+															"key": "accountProductId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[]"
+										},
+										{
+											"name": "Invalid request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products/:accountProductId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products",
+														":accountProductId"
+													],
+													"variable": [
+														{
+															"key": "accountProductId"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\",\n  \"messages\": [\n    {\n      \"message\": \"An account must have either a Business or Person associated with it.\"\n    },\n    {\n      \"message\": \"An account must have either a Business or Person associated with it.\"\n    }\n  ]\n}"
+										},
+										{
+											"name": "You are not authorized to perform this action.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products/:accountProductId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products",
+														":accountProductId"
+													],
+													"variable": [
+														{
+															"key": "accountProductId"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"You are not authorised to the specified resource.\",\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\"\n}"
+										},
+										{
+											"name": "Internal server error.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products/:accountProductId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products",
+														":accountProductId"
+													],
+													"variable": [
+														{
+															"key": "accountProductId"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n  \"message\": \"Downstream server created an exception with ID \\\\\\\"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\\\\\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get All Accounts for Party/Business/Customer",
+							"item": [
+								{
+									"name": "Get All Accounts for Party/Business/Customer - 200 - OK",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 200 - OK - Get All Accounts for Party/Business/Customer\", () => {\r",
+													"    pm.response.to.have.status(200);\r",
+													"    pm.response.to.have.status(\"OK\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object with list of accounts have all required keys - 200 - Get All Accounts for Party/Business/Customer\", () => {\r",
+													"    if (pm.response.status != \"OK\") {\r",
+													"        pm.expect.fail('The status is not 200! Check previous tests as this one requires the response to be an array!');\r",
+													"    }\r",
+													"    else {\r",
+													"        pm.expect(responseJson, 'response object is NOT an array!').to.be.an('array');\r",
+													"        pm.expect(responseJson.length, 'response object is empty!').to.be.greaterThan(0)\r",
+													"        for (var i = 0; i < responseJson.length; i++) {\r",
+													"            pm.expect(responseJson[i]).to.be.an('object').that.has.all.keys('accountId', 'accountProductId', 'name', 'currency');\r",
+													"        }\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that data type of the response for account list are correct - 200 - Get All Accounts for Party/Business/Customer\", () => {\r",
+													"    if (pm.response.status != \"OK\") {\r",
+													"        pm.expect.fail('The status is not 200! Check previous tests as this one requires the response to be an array!');\r",
+													"    } else {\r",
+													"        pm.expect(responseJson, 'response object is NOT an array!').to.be.an('array');\r",
+													"        pm.expect(responseJson.length, 'response object is empty!').to.be.greaterThan(0)\r",
+													"        for (var i = 0; i < responseJson.length; i++) {\r",
+													"            pm.expect(responseJson[i].accountId).to.be.a('string');\r",
+													"            pm.expect(responseJson[i].accountProductId).to.be.a('string');\r",
+													"            pm.expect(responseJson[i].name).to.be.a('string');\r",
+													"            pm.expect(responseJson[i].currency).to.be.a('string');\r",
+													"        }\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"for (let i = 0; i < responseJson.length; i++) {\r",
+													"    pm.test(`${responseJson[i].accountId} is a valid UUID - 200 - Get All Accounts for Party/Business/Customer`, () => {\r",
+													"        console.log(responseJson[i].accountId);\r",
+													"        pm.expect(responseJson[i].accountId).to.match(/^@?(?:[A-Za-z0-9\\-_]{4})*(?:[A-Za-z0-9\\-_]{2}==|[A-Za-z0-9-_]{3}=)?$/i);\r",
+													"    });\r",
+													"}\r",
+													"\r",
+													"for (let i = 0; i < responseJson.length; i++) {\r",
+													"    pm.test(`${responseJson[i].accountId} is a valid UUID - 200 - Get All Accounts for Party/Business/Customer`, () => {\r",
+													"        console.log(responseJson[i].accountId);\r",
+													"        pm.expect(responseJson[i].accountId).to.match(/^@?(?:[A-Za-z0-9\\-_]{4})*(?:[A-Za-z0-9\\-_]{2}==|[A-Za-z0-9-_]{3}=)?$/i);\r",
+													"    });\r",
+													"}\r",
+													"\r",
+													"for (let i = 0; i < responseJson.length; i++) {\r",
+													"    pm.test(`${responseJson[i].currency} is a valid three-letter currency code (ISO 4217) - 200 - Get All Accounts for Party/Business/Customer`, () => {\r",
+													"        console.log(responseJson[i].currency);\r",
+													"        pm.expect(responseJson[i].currency).to.match(/^[A-Z]{3}$/i);\r",
+													"    });\r",
+													"}"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/accounts?personId={{personId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"accounts"
+											],
+											"query": [
+												{
+													"key": "personId",
+													"value": "{{personId}}",
+													"description": "Only select items relevant to a specific person."
+												},
+												{
+													"key": "companyId",
+													"value": "{{companyId}}",
+													"description": "Only select items which relate to the company with the specified id",
+													"disabled": true
+												},
+												{
+													"key": "offset",
+													"value": "{{accountOffset}}",
+													"description": "How many items to skip",
+													"disabled": true
+												},
+												{
+													"key": "limit",
+													"value": "{{accountLimit}}",
+													"description": "How many items to return at one time (max 100)",
+													"disabled": true
+												}
+											]
+										},
+										"description": "Retrieve a list of accounts matching the supplied criteria. Generally, it is expected that rather than requesting the full list of accounts (a potentially very large number of records), you will want to at least constrain the results to those relating to a party (a business or person).\nFor instance, if you wish to get a list of accounts that are held by a business then you should call this endpoint passing in partyId=rJ1suQ... where the value supplied is the UID."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/accounts?personId=personId=52a8e106-6893-46b4-a792-53840a2880c6&companyId=personId=52a8e106-6893-46b4-a792-53840a2880c6&offset=-37524666&limit=-37524666",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"accounts"
+													],
+													"query": [
+														{
+															"key": "personId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items relevant to a specific person."
+														},
+														{
+															"key": "companyId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items which relate to the company with the specified id"
+														},
+														{
+															"key": "offset",
+															"value": "-37524666",
+															"description": "How many items to skip"
+														},
+														{
+															"key": "limit",
+															"value": "-37524666",
+															"description": "How many items to return at one time (max 100)"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"accountId\": \"rJ1suQy1R1-w1vDMX_qiHK3JOe1ZF70AfCYmfAC9FxA\",\n    \"accountProductId\": \"rJ1suQy1R1-w1vDMX_qiHK3JOe1ZF70AfCYmfAC9FxA\",\n    \"name\": \"Johnny Cash's Current Account\",\n    \"currency\": \"GBP\",\n    \"openedAt\": \"2021-01-30T08:30:00Z\",\n    \"closedAt\": \"2021-01-30T08:30:00Z\",\n    \"externalIdentifiers\": [\n      {\n        \"sortCode\": \"100000\",\n        \"accountNumber\": \"000000\",\n        \"identifierType\": \"SORT_CODE\"\n      },\n      {\n        \"sortCode\": \"100000\",\n        \"accountNumber\": \"000000\",\n        \"identifierType\": \"SORT_CODE\"\n      }\n    ],\n    \"balances\": {\n      \"clearedBalance\": {\n        \"value\": 12300,\n        \"unit\": \"MINOR\",\n        \"currency\": \"GBP\"\n      },\n      \"effectiveBalance\": {\n        \"value\": 12300,\n        \"unit\": \"MINOR\",\n        \"currency\": \"GBP\"\n      },\n      \"availableToSpend\": {\n        \"value\": 12300,\n        \"unit\": \"MINOR\",\n        \"currency\": \"GBP\"\n      },\n      \"allocatedBalance\": {\n        \"value\": 12300,\n        \"unit\": \"MINOR\",\n        \"currency\": \"GBP\"\n      },\n      \"creditLimit\": {\n        \"value\": 12300,\n        \"unit\": \"MINOR\",\n        \"currency\": \"GBP\"\n      },\n      \"remainingCreditLimit\": {\n        \"value\": 12300,\n        \"unit\": \"MINOR\",\n        \"currency\": \"GBP\"\n      }\n    }\n  },\n  {\n    \"accountId\": \"rJ1suQy1R1-w1vDMX_qiHK3JOe1ZF70AfCYmfAC9FxA\",\n    \"accountProductId\": \"rJ1suQy1R1-w1vDMX_qiHK3JOe1ZF70AfCYmfAC9FxA\",\n    \"name\": \"Johnny Cash's Current Account\",\n    \"currency\": \"GBP\",\n    \"openedAt\": \"2021-01-30T08:30:00Z\",\n    \"closedAt\": \"2021-01-30T08:30:00Z\",\n    \"externalIdentifiers\": [\n      {\n        \"sortCode\": \"100000\",\n        \"accountNumber\": \"000000\",\n        \"identifierType\": \"SORT_CODE\"\n      },\n      {\n        \"sortCode\": \"100000\",\n        \"accountNumber\": \"000000\",\n        \"identifierType\": \"SORT_CODE\"\n      }\n    ],\n    \"balances\": {\n      \"clearedBalance\": {\n        \"value\": 12300,\n        \"unit\": \"MINOR\",\n        \"currency\": \"GBP\"\n      },\n      \"effectiveBalance\": {\n        \"value\": 12300,\n        \"unit\": \"MINOR\",\n        \"currency\": \"GBP\"\n      },\n      \"availableToSpend\": {\n        \"value\": 12300,\n        \"unit\": \"MINOR\",\n        \"currency\": \"GBP\"\n      },\n      \"allocatedBalance\": {\n        \"value\": 12300,\n        \"unit\": \"MINOR\",\n        \"currency\": \"GBP\"\n      },\n      \"creditLimit\": {\n        \"value\": 12300,\n        \"unit\": \"MINOR\",\n        \"currency\": \"GBP\"\n      },\n      \"remainingCreditLimit\": {\n        \"value\": 12300,\n        \"unit\": \"MINOR\",\n        \"currency\": \"GBP\"\n      }\n    }\n  }\n]"
+										},
+										{
+											"name": "Invalid request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/accounts?personId=personId=52a8e106-6893-46b4-a792-53840a2880c6&companyId=personId=52a8e106-6893-46b4-a792-53840a2880c6&offset=-37524666&limit=-37524666",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"accounts"
+													],
+													"query": [
+														{
+															"key": "personId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items relevant to a specific person."
+														},
+														{
+															"key": "companyId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items which relate to the company with the specified id"
+														},
+														{
+															"key": "offset",
+															"value": "-37524666",
+															"description": "How many items to skip"
+														},
+														{
+															"key": "limit",
+															"value": "-37524666",
+															"description": "How many items to return at one time (max 100)"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n  \"messages\": [\n    {\n      \"message\": \"Could not find resource with uid \\\\\\\"fa26026d-68b7-4a59-ae1f-c6658aae9a1f\\\\.\"\n    },\n    {\n      \"message\": \"Could not find resource with uid \\\\\\\"fa26026d-68b7-4a59-ae1f-c6658aae9a1f\\\\.\"\n    }\n  ]\n}"
+										},
+										{
+											"name": "You are not authorized to perform this action.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/accounts?personId=personId=52a8e106-6893-46b4-a792-53840a2880c6&companyId=personId=52a8e106-6893-46b4-a792-53840a2880c6&offset=-37524666&limit=-37524666",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"accounts"
+													],
+													"query": [
+														{
+															"key": "personId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items relevant to a specific person."
+														},
+														{
+															"key": "companyId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items which relate to the company with the specified id"
+														},
+														{
+															"key": "offset",
+															"value": "-37524666",
+															"description": "How many items to skip"
+														},
+														{
+															"key": "limit",
+															"value": "-37524666",
+															"description": "How many items to return at one time (max 100)"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"You are not authorised to the specified resource.\",\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\"\n}"
+										},
+										{
+											"name": "The resource could not be found.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/accounts?personId=personId=52a8e106-6893-46b4-a792-53840a2880c6&companyId=personId=52a8e106-6893-46b4-a792-53840a2880c6&offset=-37524666&limit=-37524666",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"accounts"
+													],
+													"query": [
+														{
+															"key": "personId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items relevant to a specific person."
+														},
+														{
+															"key": "companyId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items which relate to the company with the specified id"
+														},
+														{
+															"key": "offset",
+															"value": "-37524666",
+															"description": "How many items to skip"
+														},
+														{
+															"key": "limit",
+															"value": "-37524666",
+															"description": "How many items to return at one time (max 100)"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"Could not find resource with uid \\\"fa26026d-68b7-4a59-ae1f-c6658aae9a1f\\\"\",\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\"\n}"
+										},
+										{
+											"name": "Internal server error.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/accounts?personId=personId=52a8e106-6893-46b4-a792-53840a2880c6&companyId=personId=52a8e106-6893-46b4-a792-53840a2880c6&offset=-37524666&limit=-37524666",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"accounts"
+													],
+													"query": [
+														{
+															"key": "personId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items relevant to a specific person."
+														},
+														{
+															"key": "companyId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items which relate to the company with the specified id"
+														},
+														{
+															"key": "offset",
+															"value": "-37524666",
+															"description": "How many items to skip"
+														},
+														{
+															"key": "limit",
+															"value": "-37524666",
+															"description": "How many items to return at one time (max 100)"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n  \"message\": \"Downstream server created an exception with ID \\\\\\\"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\\\\\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Retrieve an account details",
+							"item": [
+								{
+									"name": "Retrieve an account details - 200 - OK",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 200 - OK - Get All Accounts for Party/Business/Customer\", () => {\r",
+													"    pm.response.to.have.status(200);\r",
+													"    pm.response.to.have.status(\"OK\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object with list of accounts have all required keys\", () => {\r",
+													"    if (pm.response.status != \"OK\") {\r",
+													"        pm.expect.fail('The status is not 200! Check previous tests as this one requires the response to be an array!');\r",
+													"    }\r",
+													"    else {\r",
+													"        pm.expect(responseJson, 'response object is NOT an array!').to.be.an('array');\r",
+													"        pm.expect(responseJson.length, 'response object is empty!').to.be.greaterThan(0)\r",
+													"        for (var i = 0; i < responseJson.length; i++) {\r",
+													"            pm.expect(responseJson[i]).to.be.an('object').that.has.all.keys('accountId', 'accountProductId', 'name', 'currency');\r",
+													"        }\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that data type of the response for account list are correct\", () => {\r",
+													"    if (pm.response.status != \"OK\") {\r",
+													"        pm.expect.fail('The status is not 200! Check previous tests as this one requires the response to be an array!');\r",
+													"    } else {\r",
+													"        pm.expect(responseJson, 'response object is NOT an array!').to.be.an('array');\r",
+													"        pm.expect(responseJson.length, 'response object is empty!').to.be.greaterThan(0)\r",
+													"        for (var i = 0; i < responseJson.length; i++) {\r",
+													"            pm.expect(responseJson[i].accountId).to.be.a('string');\r",
+													"            pm.expect(responseJson[i].accountProductId).to.be.a('string');\r",
+													"            pm.expect(responseJson[i].name).to.be.a('string');\r",
+													"            pm.expect(responseJson[i].currency).to.be.a('string');\r",
+													"        }\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"for (let i = 0; i < responseJson.length; i++) {\r",
+													"    pm.test(`${responseJson[i].accountId} is a valid UUID`, () => {\r",
+													"        console.log(responseJson[i].accountId);\r",
+													"        pm.expect(responseJson[i].accountId).to.match(/^@?(?:[A-Za-z0-9\\-_]{4})*(?:[A-Za-z0-9\\-_]{2}==|[A-Za-z0-9-_]{3}=)?$/i);\r",
+													"    });\r",
+													"}\r",
+													"\r",
+													"for (let i = 0; i < responseJson.length; i++) {\r",
+													"    pm.test(`${responseJson[i].accountId} is a valid UUID`, () => {\r",
+													"        console.log(responseJson[i].accountId);\r",
+													"        pm.expect(responseJson[i].accountId).to.match(/^@?(?:[A-Za-z0-9\\-_]{4})*(?:[A-Za-z0-9\\-_]{2}==|[A-Za-z0-9-_]{3}=)?$/i);\r",
+													"    });\r",
+													"}\r",
+													"\r",
+													"for (let i = 0; i < responseJson.length; i++) {\r",
+													"    pm.test(`${responseJson[i].currency} is a valid three-letter currency code (ISO 4217)`, () => {\r",
+													"        console.log(responseJson[i].currency);\r",
+													"        pm.expect(responseJson[i].currency).to.match(/^[A-Z]{3}$/i);\r",
+													"    });\r",
+													"}"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "x-mock-header",
+												"value": "internal-server-error",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/accounts/{{accountId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"accounts",
+												"{{accountId}}"
+											]
+										},
+										"description": "Retrieve the details of a single specific account. You must pass a valid UID for the account in the query parameter accountId."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Update an account",
+							"item": [
+								{
+									"name": "Update an account - 200 - OK",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"let accountName = pm.iterationData.get(\"AccountName\")\r",
+													"\r",
+													"pm.test(\"Status code is 200 - OK - Update an account\", () => {\r",
+													"    pm.response.to.have.status(200);\r",
+													"    pm.response.to.have.status(\"OK\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Updated name from the payload should be \" + accountName + \" - 200 - Update an account\", () => {\r",
+													"    pm.expect(responseJson.name).to.eql(accountName)\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": {{AccountName}}\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/accounts/{{accountId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"accounts",
+												"{{accountId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Negative testing",
+					"item": [
+						{
+							"name": "Get a list of account products available",
+							"item": [
+								{
+									"name": "Get a list of account products available - 500 - Internal server error",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 500 - Get a list of account products available\", () => {\r",
+													"    pm.response.to.have.status(500);\r",
+													"    pm.response.to.have.status(\"Internal Server Error\");\r",
+													"});\r",
+													"\r",
+													"\r",
+													"pm.test(\"Check that response object have all required keys - 500 - Get a list of account products available\", () => {\r",
+													"  pm.expect(responseJson).to.be.an('object')\r",
+													"  .that.has.all.keys('id', 'message');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have required error message - 500 - Get a list of account products available\", () => {\r",
+													"    pm.expect(responseJson.message).to.include(\"Downstream server created an exception with ID\");\r",
+													"});\r",
+													"\r",
+													"/*\r",
+													"pm.test(\"Check that ID of the product from response is correct\", () => {\r",
+													"    pm.expect(responseJson.id).to.include(\"id_string\");\r",
+													"});\r",
+													"*/"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "x-mock-header",
+												"value": "internal-server-error",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/account-products?productId={{productId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"account-products"
+											],
+											"query": [
+												{
+													"key": "productId",
+													"value": "{{productId}}",
+													"description": "Only select terms which relate to the product with the specified id"
+												}
+											]
+										},
+										"description": "Get a list of account products available."
+									},
+									"response": [
+										{
+											"name": "ok",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products?productId=570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products"
+													],
+													"query": [
+														{
+															"key": "productId",
+															"value": "570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+															"description": "Only select terms which relate to the product with the specified id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  [\n    {\n      \"accountProductId\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n      \"description\": \"Personal Current Account\"\n    },\n    {\n      \"accountProductId\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n      \"description\": \"Personal Current Account\"\n    }\n  ],\n  [\n    {\n      \"accountProductId\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n      \"description\": \"Personal Current Account\"\n    },\n    {\n      \"accountProductId\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n      \"description\": \"Personal Current Account\"\n    }\n  ]\n]"
+										},
+										{
+											"name": "Invalid request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products?productId=570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products"
+													],
+													"query": [
+														{
+															"key": "productId",
+															"value": "570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+															"description": "Only select terms which relate to the product with the specified id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\",\n  \"messages\": [\n    {\n      \"message\": \"An account must have either a Business or Person associated with it.\"\n    },\n    {\n      \"message\": \"An account must have either a Business or Person associated with it.\"\n    }\n  ]\n}"
+										},
+										{
+											"name": "You are not authorized to perform this action.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products?productId=570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products"
+													],
+													"query": [
+														{
+															"key": "productId",
+															"value": "570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+															"description": "Only select terms which relate to the product with the specified id"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"You are not authorised to the specified resource.\",\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\"\n}"
+										},
+										{
+											"name": "Internal server error.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products?productId=570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products"
+													],
+													"query": [
+														{
+															"key": "productId",
+															"value": "570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+															"description": "Only select terms which relate to the product with the specified id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n  \"message\": \"Downstream server created an exception with ID \\\\\\\"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\\\\\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Get a list of account products available - 400 - Bad Request",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 400 - Get a list of account products available\", () => {\r",
+													"    pm.response.to.have.status(400);\r",
+													"    pm.response.to.have.status(\"Bad Request\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have all required keys - 400 - Get a list of account products available\", () => {\r",
+													"    pm.expect(responseJson).to.be.an('object')\r",
+													"        .that.has.all.keys('id', 'messages');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that 'messages' response object have all required keys - 400 - Get a list of account products available\", () => {\r",
+													"    for (var i = 0; i < responseJson.messages.length; i++) {\r",
+													"        pm.expect(responseJson.messages[i]).to.be.an('object')\r",
+													"        pm.expect(responseJson.messages[i].message).to.be.an('string')\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have required error messages - 400 - Get a list of account products available\", () => {\r",
+													"    for (var i = 0; i < responseJson.messages.length; i++) {\r",
+													"        pm.expect(responseJson.messages[i].message)\r",
+													"            .to.contain.oneOf(\r",
+													"                [\r",
+													"                    \"An account must have either a Business or Person associated with it.\",\r",
+													"                    \"Account not is pending review.\",\r",
+													"                ]\r",
+													"            );\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "x-mock-header",
+												"value": "invalid-request",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/account-products?productId={{productId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"account-products"
+											],
+											"query": [
+												{
+													"key": "productId",
+													"value": "{{productId}}",
+													"description": "Only select terms which relate to the product with the specified id"
+												}
+											]
+										},
+										"description": "Get a list of account products available."
+									},
+									"response": [
+										{
+											"name": "ok",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products?productId=570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products"
+													],
+													"query": [
+														{
+															"key": "productId",
+															"value": "570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+															"description": "Only select terms which relate to the product with the specified id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  [\n    {\n      \"accountProductId\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n      \"description\": \"Personal Current Account\"\n    },\n    {\n      \"accountProductId\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n      \"description\": \"Personal Current Account\"\n    }\n  ],\n  [\n    {\n      \"accountProductId\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n      \"description\": \"Personal Current Account\"\n    },\n    {\n      \"accountProductId\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n      \"description\": \"Personal Current Account\"\n    }\n  ]\n]"
+										},
+										{
+											"name": "Invalid request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products?productId=570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products"
+													],
+													"query": [
+														{
+															"key": "productId",
+															"value": "570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+															"description": "Only select terms which relate to the product with the specified id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\",\n  \"messages\": [\n    {\n      \"message\": \"An account must have either a Business or Person associated with it.\"\n    },\n    {\n      \"message\": \"An account must have either a Business or Person associated with it.\"\n    }\n  ]\n}"
+										},
+										{
+											"name": "You are not authorized to perform this action.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products?productId=570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products"
+													],
+													"query": [
+														{
+															"key": "productId",
+															"value": "570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+															"description": "Only select terms which relate to the product with the specified id"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"You are not authorised to the specified resource.\",\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\"\n}"
+										},
+										{
+											"name": "Internal server error.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products?productId=570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products"
+													],
+													"query": [
+														{
+															"key": "productId",
+															"value": "570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+															"description": "Only select terms which relate to the product with the specified id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n  \"message\": \"Downstream server created an exception with ID \\\\\\\"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\\\\\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Get a list of account products available - 403 - Forbidden",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 403 - Get a list of account products available\", () => {\r",
+													"    pm.response.to.have.status(403);\r",
+													"});\r",
+													"\r",
+													"\r",
+													"pm.test(\"Check that response object have all required keys\", () => {\r",
+													"  pm.expect(responseJson).to.be.an('object')\r",
+													"  .that.has.all.keys('id', 'message');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have required error message\", () => {\r",
+													"    pm.expect(responseJson.message).to.include(\"You are not authorised to the specified resource.\");\r",
+													"});\r",
+													"\r",
+													"/*\r",
+													"pm.test(\"Check that ID of the product from response is correct\", () => {\r",
+													"    pm.expect(responseJson.id).to.include(\"id_string\");\r",
+													"});\r",
+													"*/"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "x-mock-header",
+												"value": "unauthorized",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/account-products?productId={{productId}}&x-mock-header=unauthorized",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"account-products"
+											],
+											"query": [
+												{
+													"key": "productId",
+													"value": "{{productId}}",
+													"description": "Only select terms which relate to the product with the specified id"
+												},
+												{
+													"key": "x-mock-header",
+													"value": "unauthorized"
+												}
+											]
+										},
+										"description": "Get a list of account products available."
+									},
+									"response": [
+										{
+											"name": "ok",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products?productId=570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products"
+													],
+													"query": [
+														{
+															"key": "productId",
+															"value": "570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+															"description": "Only select terms which relate to the product with the specified id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  [\n    {\n      \"accountProductId\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n      \"description\": \"Personal Current Account\"\n    },\n    {\n      \"accountProductId\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n      \"description\": \"Personal Current Account\"\n    }\n  ],\n  [\n    {\n      \"accountProductId\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n      \"description\": \"Personal Current Account\"\n    },\n    {\n      \"accountProductId\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n      \"description\": \"Personal Current Account\"\n    }\n  ]\n]"
+										},
+										{
+											"name": "Invalid request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products?productId=570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products"
+													],
+													"query": [
+														{
+															"key": "productId",
+															"value": "570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+															"description": "Only select terms which relate to the product with the specified id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\",\n  \"messages\": [\n    {\n      \"message\": \"An account must have either a Business or Person associated with it.\"\n    },\n    {\n      \"message\": \"An account must have either a Business or Person associated with it.\"\n    }\n  ]\n}"
+										},
+										{
+											"name": "You are not authorized to perform this action.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products?productId=570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products"
+													],
+													"query": [
+														{
+															"key": "productId",
+															"value": "570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+															"description": "Only select terms which relate to the product with the specified id"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"You are not authorised to the specified resource.\",\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\"\n}"
+										},
+										{
+											"name": "Internal server error.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products?productId=570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products"
+													],
+													"query": [
+														{
+															"key": "productId",
+															"value": "570ecbb7-320f-eb6b-9174-e6ca4c4c38af",
+															"description": "Only select terms which relate to the product with the specified id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n  \"message\": \"Downstream server created an exception with ID \\\\\\\"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\\\\\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get the details of a specified product",
+							"item": [
+								{
+									"name": "Get the details of a specified product - 500 - Internal server error",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 500 - Get the details of a specified product\", () => {\r",
+													"    pm.response.to.have.status(500);\r",
+													"    pm.response.to.have.status(\"Internal Server Error\");\r",
+													"});\r",
+													"\r",
+													"\r",
+													"pm.test(\"Check that response object have all required keys\", () => {\r",
+													"  pm.expect(responseJson).to.be.an('object')\r",
+													"  .that.has.all.keys('id', 'message');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have required error message\", () => {\r",
+													"    pm.expect(responseJson.message).to.include(\"Downstream server created an exception with ID\");\r",
+													"});\r",
+													"\r",
+													"/*\r",
+													"pm.test(\"Check that ID of the product from response is correct\", () => {\r",
+													"    pm.expect(responseJson.id).to.include(\"id_string\");\r",
+													"});\r",
+													"*/"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "x-mock-header",
+												"value": "internal-server-error",
+												"description": "only for mocks",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/account-products/{{AccountProductID}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"account-products",
+												"{{AccountProductID}}"
+											]
+										},
+										"description": "Get the details of a specified product."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products/:accountProductId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products",
+														":accountProductId"
+													],
+													"variable": [
+														{
+															"key": "accountProductId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[]"
+										},
+										{
+											"name": "Invalid request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products/:accountProductId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products",
+														":accountProductId"
+													],
+													"variable": [
+														{
+															"key": "accountProductId"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\",\n  \"messages\": [\n    {\n      \"message\": \"An account must have either a Business or Person associated with it.\"\n    },\n    {\n      \"message\": \"An account must have either a Business or Person associated with it.\"\n    }\n  ]\n}"
+										},
+										{
+											"name": "You are not authorized to perform this action.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products/:accountProductId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products",
+														":accountProductId"
+													],
+													"variable": [
+														{
+															"key": "accountProductId"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"You are not authorised to the specified resource.\",\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\"\n}"
+										},
+										{
+											"name": "Internal server error.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products/:accountProductId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products",
+														":accountProductId"
+													],
+													"variable": [
+														{
+															"key": "accountProductId"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n  \"message\": \"Downstream server created an exception with ID \\\\\\\"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\\\\\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Get the details of a specified product - 400 - Bad Request",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 400 - Get the details of a specified product\", () => {\r",
+													"    pm.response.to.have.status(400);\r",
+													"    pm.response.to.have.status(\"Bad Request\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have all required keys\", () => {\r",
+													"    pm.expect(responseJson).to.be.an('object')\r",
+													"        .that.has.all.keys('id', 'messages');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that 'messages' response object have all required keys\", () => {\r",
+													"    for (var i = 0; i < responseJson.messages.length; i++) {\r",
+													"        pm.expect(responseJson.messages[i]).to.be.an('object')\r",
+													"        pm.expect(responseJson.messages[i].message).to.be.an('string')\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have required error messages\", () => {\r",
+													"    for (var i = 0; i < responseJson.messages.length; i++) {\r",
+													"        pm.expect(responseJson.messages[i].message)\r",
+													"            .to.contain.oneOf(\r",
+													"                [\r",
+													"                    \"An account must have either a Business or Person associated with it.\",\r",
+													"                    \"Account not is pending review.\",\r",
+													"                ]\r",
+													"            );\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "x-mock-header",
+												"value": "invalid-request",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/account-products/{{AccountProductID}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"account-products",
+												"{{AccountProductID}}"
+											]
+										},
+										"description": "Get the details of a specified product."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products/:accountProductId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products",
+														":accountProductId"
+													],
+													"variable": [
+														{
+															"key": "accountProductId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[]"
+										},
+										{
+											"name": "Invalid request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products/:accountProductId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products",
+														":accountProductId"
+													],
+													"variable": [
+														{
+															"key": "accountProductId"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\",\n  \"messages\": [\n    {\n      \"message\": \"An account must have either a Business or Person associated with it.\"\n    },\n    {\n      \"message\": \"An account must have either a Business or Person associated with it.\"\n    }\n  ]\n}"
+										},
+										{
+											"name": "You are not authorized to perform this action.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products/:accountProductId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products",
+														":accountProductId"
+													],
+													"variable": [
+														{
+															"key": "accountProductId"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"You are not authorised to the specified resource.\",\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\"\n}"
+										},
+										{
+											"name": "Internal server error.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products/:accountProductId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products",
+														":accountProductId"
+													],
+													"variable": [
+														{
+															"key": "accountProductId"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n  \"message\": \"Downstream server created an exception with ID \\\\\\\"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\\\\\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Get the details of a specified product - 403 - Forbidden",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 403 - Get the details of a specified product\", () => {\r",
+													"    pm.response.to.have.status(403);\r",
+													"});\r",
+													"\r",
+													"\r",
+													"pm.test(\"Check that response object have all required keys\", () => {\r",
+													"  pm.expect(responseJson).to.be.an('object')\r",
+													"  .that.has.all.keys('id', 'message');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have required error message\", () => {\r",
+													"    pm.expect(responseJson.message).to.include(\"You are not authorised to the specified resource.\");\r",
+													"});\r",
+													"\r",
+													"/*\r",
+													"pm.test(\"Check that ID of the product from response is correct\", () => {\r",
+													"    pm.expect(responseJson.id).to.include(\"id_string\");\r",
+													"});\r",
+													"*/"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "x-mock-header",
+												"value": "unauthorized",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/account-products/{{AccountProductID}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"account-products",
+												"{{AccountProductID}}"
+											]
+										},
+										"description": "Get the details of a specified product."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products/:accountProductId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products",
+														":accountProductId"
+													],
+													"variable": [
+														{
+															"key": "accountProductId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[]"
+										},
+										{
+											"name": "Invalid request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products/:accountProductId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products",
+														":accountProductId"
+													],
+													"variable": [
+														{
+															"key": "accountProductId"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\",\n  \"messages\": [\n    {\n      \"message\": \"An account must have either a Business or Person associated with it.\"\n    },\n    {\n      \"message\": \"An account must have either a Business or Person associated with it.\"\n    }\n  ]\n}"
+										},
+										{
+											"name": "You are not authorized to perform this action.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products/:accountProductId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products",
+														":accountProductId"
+													],
+													"variable": [
+														{
+															"key": "accountProductId"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"You are not authorised to the specified resource.\",\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\"\n}"
+										},
+										{
+											"name": "Internal server error.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/account-products/:accountProductId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"account-products",
+														":accountProductId"
+													],
+													"variable": [
+														{
+															"key": "accountProductId"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n  \"message\": \"Downstream server created an exception with ID \\\\\\\"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\\\\\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get All Accounts for Party/Business/Customer",
+							"item": [
+								{
+									"name": "Get All Accounts for Party/Business/Customer - 500 - Internal server error",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 500 - Get All Accounts for Party/Business/Customer\", () => {\r",
+													"    pm.response.to.have.status(500);\r",
+													"    pm.response.to.have.status(\"Internal Server Error\");\r",
+													"});\r",
+													"\r",
+													"\r",
+													"pm.test(\"Check that response object have all required keys\", () => {\r",
+													"  pm.expect(responseJson).to.be.an('object')\r",
+													"  .that.has.all.keys('id', 'message');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have required error message\", () => {\r",
+													"    pm.expect(responseJson.message).to.include(\"Downstream server created an exception with ID\");\r",
+													"});\r",
+													"\r",
+													"/*\r",
+													"pm.test(\"Check that ID of the product from response is correct\", () => {\r",
+													"    pm.expect(responseJson.id).to.include(\"id_string\");\r",
+													"});\r",
+													"*/"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/accounts?personId={{personId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"accounts"
+											],
+											"query": [
+												{
+													"key": "personId",
+													"value": "{{personId}}",
+													"description": "Only select items relevant to a specific person."
+												},
+												{
+													"key": "companyId",
+													"value": "{{companyId}}",
+													"description": "Only select items which relate to the company with the specified id",
+													"disabled": true
+												},
+												{
+													"key": "offset",
+													"value": "{{accountOffset}}",
+													"description": "How many items to skip",
+													"disabled": true
+												},
+												{
+													"key": "limit",
+													"value": "{{accountLimit}}",
+													"description": "How many items to return at one time (max 100)",
+													"disabled": true
+												}
+											]
+										},
+										"description": "Retrieve a list of accounts matching the supplied criteria. Generally, it is expected that rather than requesting the full list of accounts (a potentially very large number of records), you will want to at least constrain the results to those relating to a party (a business or person).\nFor instance, if you wish to get a list of accounts that are held by a business then you should call this endpoint passing in partyId=rJ1suQ... where the value supplied is the UID."
+									},
+									"response": [
+										{
+											"name": "Internal server error.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/accounts?personId=personId=52a8e106-6893-46b4-a792-53840a2880c6&companyId=personId=52a8e106-6893-46b4-a792-53840a2880c6&offset=-37524666&limit=-37524666",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"accounts"
+													],
+													"query": [
+														{
+															"key": "personId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items relevant to a specific person."
+														},
+														{
+															"key": "companyId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items which relate to the company with the specified id"
+														},
+														{
+															"key": "offset",
+															"value": "-37524666",
+															"description": "How many items to skip"
+														},
+														{
+															"key": "limit",
+															"value": "-37524666",
+															"description": "How many items to return at one time (max 100)"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n  \"message\": \"Downstream server created an exception with ID \\\\\\\"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\\\\\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Get All Accounts for Party/Business/Customer - 400 - Bad Request",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 400 - Get All Accounts for Party/Business/Customer\", () => {\r",
+													"    pm.response.to.have.status(400);\r",
+													"    pm.response.to.have.status(\"Bad Request\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have all required keys\", () => {\r",
+													"    pm.expect(responseJson).to.be.an('object')\r",
+													"        .that.has.all.keys('id', 'messages');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that 'messages' response object have all required keys\", () => {\r",
+													"    for (var i = 0; i < responseJson.messages.length; i++) {\r",
+													"        pm.expect(responseJson.messages[i]).to.be.an('object')\r",
+													"        pm.expect(responseJson.messages[i].message).to.be.an('string')\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have required error messages\", () => {\r",
+													"    for (var i = 0; i < responseJson.messages.length; i++) {\r",
+													"        pm.expect(responseJson.messages[i].message)\r",
+													"            .to.contain.oneOf(\r",
+													"                [\r",
+													"                    \"An account must have either a Business or Person associated with it.\",\r",
+													"                    \"Account not is pending review.\",\r",
+													"                ]\r",
+													"            );\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/accounts?personId={{personId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"accounts"
+											],
+											"query": [
+												{
+													"key": "personId",
+													"value": "{{personId}}",
+													"description": "Only select items relevant to a specific person."
+												},
+												{
+													"key": "companyId",
+													"value": "{{companyId}}",
+													"description": "Only select items which relate to the company with the specified id",
+													"disabled": true
+												},
+												{
+													"key": "offset",
+													"value": "{{accountOffset}}",
+													"description": "How many items to skip",
+													"disabled": true
+												},
+												{
+													"key": "limit",
+													"value": "{{accountLimit}}",
+													"description": "How many items to return at one time (max 100)",
+													"disabled": true
+												}
+											]
+										},
+										"description": "Retrieve a list of accounts matching the supplied criteria. Generally, it is expected that rather than requesting the full list of accounts (a potentially very large number of records), you will want to at least constrain the results to those relating to a party (a business or person).\nFor instance, if you wish to get a list of accounts that are held by a business then you should call this endpoint passing in partyId=rJ1suQ... where the value supplied is the UID."
+									},
+									"response": [
+										{
+											"name": "Invalid request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/accounts?personId=personId=52a8e106-6893-46b4-a792-53840a2880c6&companyId=personId=52a8e106-6893-46b4-a792-53840a2880c6&offset=-37524666&limit=-37524666",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"accounts"
+													],
+													"query": [
+														{
+															"key": "personId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items relevant to a specific person."
+														},
+														{
+															"key": "companyId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items which relate to the company with the specified id"
+														},
+														{
+															"key": "offset",
+															"value": "-37524666",
+															"description": "How many items to skip"
+														},
+														{
+															"key": "limit",
+															"value": "-37524666",
+															"description": "How many items to return at one time (max 100)"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"07cc67f4-45d6-494b-adac-09b5cbc7e2b5\",\n  \"messages\": [\n    {\n      \"message\": \"Could not find resource with uid \\\\\\\"fa26026d-68b7-4a59-ae1f-c6658aae9a1f\\\\.\"\n    },\n    {\n      \"message\": \"Could not find resource with uid \\\\\\\"fa26026d-68b7-4a59-ae1f-c6658aae9a1f\\\\.\"\n    }\n  ]\n}"
+										}
+									]
+								},
+								{
+									"name": "Get All Accounts for Party/Business/Customer - 403 - Forbidden",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 403 - Get All Accounts for Party/Business/Customer\", () => {\r",
+													"    pm.response.to.have.status(403);\r",
+													"});\r",
+													"\r",
+													"\r",
+													"pm.test(\"Check that response object have all required keys\", () => {\r",
+													"  pm.expect(responseJson).to.be.an('object')\r",
+													"  .that.has.all.keys('id', 'message');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have required error message\", () => {\r",
+													"    pm.expect(responseJson.message).to.include(\"You are not authorised to the specified resource.\");\r",
+													"});\r",
+													"\r",
+													"/*\r",
+													"pm.test(\"Check that ID of the product from response is correct\", () => {\r",
+													"    pm.expect(responseJson.id).to.include(\"id_string\");\r",
+													"});\r",
+													"*/"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/accounts?personId={{personId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"accounts"
+											],
+											"query": [
+												{
+													"key": "personId",
+													"value": "{{personId}}",
+													"description": "Only select items relevant to a specific person."
+												},
+												{
+													"key": "companyId",
+													"value": "{{companyId}}",
+													"description": "Only select items which relate to the company with the specified id",
+													"disabled": true
+												},
+												{
+													"key": "offset",
+													"value": "{{accountOffset}}",
+													"description": "How many items to skip",
+													"disabled": true
+												},
+												{
+													"key": "limit",
+													"value": "{{accountLimit}}",
+													"description": "How many items to return at one time (max 100)",
+													"disabled": true
+												}
+											]
+										},
+										"description": "Retrieve a list of accounts matching the supplied criteria. Generally, it is expected that rather than requesting the full list of accounts (a potentially very large number of records), you will want to at least constrain the results to those relating to a party (a business or person).\nFor instance, if you wish to get a list of accounts that are held by a business then you should call this endpoint passing in partyId=rJ1suQ... where the value supplied is the UID."
+									},
+									"response": [
+										{
+											"name": "You are not authorized to perform this action.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/accounts?personId=personId=52a8e106-6893-46b4-a792-53840a2880c6&companyId=personId=52a8e106-6893-46b4-a792-53840a2880c6&offset=-37524666&limit=-37524666",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"accounts"
+													],
+													"query": [
+														{
+															"key": "personId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items relevant to a specific person."
+														},
+														{
+															"key": "companyId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items which relate to the company with the specified id"
+														},
+														{
+															"key": "offset",
+															"value": "-37524666",
+															"description": "How many items to skip"
+														},
+														{
+															"key": "limit",
+															"value": "-37524666",
+															"description": "How many items to return at one time (max 100)"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"You are not authorised to the specified resource.\",\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Get All Accounts for Party/Business/Customer - 404 - Not Found",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 404 - Get All Accounts for Party/Business/Customer\", () => {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"\r",
+													"\r",
+													"pm.test(\"Check that response object have all required keys\", () => {\r",
+													"  pm.expect(responseJson).to.be.an('object')\r",
+													"  .that.has.all.keys('id', 'message');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have required error message\", () => {\r",
+													"    pm.expect(responseJson.message).to.include(\"Could not find resource with uid\");\r",
+													"});\r",
+													"\r",
+													"\r",
+													"/*\r",
+													"pm.test(\"Check that ID of the product from response is correct\", () => {\r",
+													"    pm.expect(responseJson.id).to.include(\"id_string\");\r",
+													"});\r",
+													"*/"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/accounts?personId={{personId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"accounts"
+											],
+											"query": [
+												{
+													"key": "personId",
+													"value": "{{personId}}",
+													"description": "Only select items relevant to a specific person."
+												},
+												{
+													"key": "companyId",
+													"value": "{{companyId}}",
+													"description": "Only select items which relate to the company with the specified id",
+													"disabled": true
+												},
+												{
+													"key": "offset",
+													"value": "{{accountOffset}}",
+													"description": "How many items to skip",
+													"disabled": true
+												},
+												{
+													"key": "limit",
+													"value": "{{accountLimit}}",
+													"description": "How many items to return at one time (max 100)",
+													"disabled": true
+												}
+											]
+										},
+										"description": "Retrieve a list of accounts matching the supplied criteria. Generally, it is expected that rather than requesting the full list of accounts (a potentially very large number of records), you will want to at least constrain the results to those relating to a party (a business or person).\nFor instance, if you wish to get a list of accounts that are held by a business then you should call this endpoint passing in partyId=rJ1suQ... where the value supplied is the UID."
+									},
+									"response": [
+										{
+											"name": "The resource could not be found.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/accounts?personId=personId=52a8e106-6893-46b4-a792-53840a2880c6&companyId=personId=52a8e106-6893-46b4-a792-53840a2880c6&offset=-37524666&limit=-37524666",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"accounts"
+													],
+													"query": [
+														{
+															"key": "personId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items relevant to a specific person."
+														},
+														{
+															"key": "companyId",
+															"value": "personId=52a8e106-6893-46b4-a792-53840a2880c6",
+															"description": "Only select items which relate to the company with the specified id"
+														},
+														{
+															"key": "offset",
+															"value": "-37524666",
+															"description": "How many items to skip"
+														},
+														{
+															"key": "limit",
+															"value": "-37524666",
+															"description": "How many items to return at one time (max 100)"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"Could not find resource with uid \\\"fa26026d-68b7-4a59-ae1f-c6658aae9a1f\\\"\",\n  \"id\": \"20221123-093412123-cb507d7a-aed5-11ed-afa1-0242ac120002\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Retrieve an account details",
+							"item": [
+								{
+									"name": "Retrieve an account details - 500 - Internal Server Error",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 500 - Retrieve an account details\", () => {\r",
+													"    pm.response.to.have.status(500);\r",
+													"    pm.response.to.have.status(\"Internal Server Error\");\r",
+													"});\r",
+													"\r",
+													"\r",
+													"pm.test(\"Check that response object have all required keys\", () => {\r",
+													"  pm.expect(responseJson).to.be.an('object')\r",
+													"  .that.has.all.keys('id', 'message');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have required error message\", () => {\r",
+													"    pm.expect(responseJson.message).to.include(\"Downstream server created an exception with ID\");\r",
+													"});\r",
+													"\r",
+													"/*\r",
+													"pm.test(\"Check that ID of the product from response is correct\", () => {\r",
+													"    pm.expect(responseJson.id).to.include(\"id_string\");\r",
+													"});\r",
+													"*/"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "x-mock-header",
+												"value": "internal-server-error",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/accounts/{{accountId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"accounts",
+												"{{accountId}}"
+											]
+										},
+										"description": "Retrieve the details of a single specific account. You must pass a valid UID for the account in the query parameter accountId."
+									},
+									"response": []
+								},
+								{
+									"name": "Retrieve an account details - 400 - Bad Request",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 400 - Retrieve an account details\", () => {\r",
+													"    pm.response.to.have.status(400);\r",
+													"    pm.response.to.have.status(\"Bad Request\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have all required keys\", () => {\r",
+													"    pm.expect(responseJson).to.be.an('object')\r",
+													"        .that.has.all.keys('id', 'messages');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that 'messages' response object have all required keys\", () => {\r",
+													"    for (var i = 0; i < responseJson.messages.length; i++) {\r",
+													"        pm.expect(responseJson.messages[i]).to.be.an('object')\r",
+													"        pm.expect(responseJson.messages[i].message).to.be.an('string')\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have required error messages\", () => {\r",
+													"    for (var i = 0; i < responseJson.messages.length; i++) {\r",
+													"        pm.expect(responseJson.messages[i].message)\r",
+													"            .to.contain.oneOf(\r",
+													"                [\r",
+													"                    \"An account must have either a Business or Person associated with it.\",\r",
+													"                    \"Account not is pending review.\",\r",
+													"                ]\r",
+													"            );\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "x-mock-header",
+												"value": "invalid-request",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/accounts/{{accountId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"accounts",
+												"{{accountId}}"
+											]
+										},
+										"description": "Retrieve the details of a single specific account. You must pass a valid UID for the account in the query parameter accountId."
+									},
+									"response": []
+								},
+								{
+									"name": "Retrieve an account details - 403 - Forbidden",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 403 - Retrieve an account details\", () => {\r",
+													"    pm.response.to.have.status(403);\r",
+													"});\r",
+													"\r",
+													"\r",
+													"pm.test(\"Check that response object have all required keys\", () => {\r",
+													"  pm.expect(responseJson).to.be.an('object')\r",
+													"  .that.has.all.keys('id', 'message');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have required error message\", () => {\r",
+													"    pm.expect(responseJson.message).to.include(\"You are not authorised to the specified resource.\");\r",
+													"});\r",
+													"\r",
+													"/*\r",
+													"pm.test(\"Check that ID of the product from response is correct\", () => {\r",
+													"    pm.expect(responseJson.id).to.include(\"id_string\");\r",
+													"});\r",
+													"*/"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "x-mock-header",
+												"value": "unauthorized",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/accounts/{{accountId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"accounts",
+												"{{accountId}}"
+											]
+										},
+										"description": "Retrieve the details of a single specific account. You must pass a valid UID for the account in the query parameter accountId."
+									},
+									"response": []
+								},
+								{
+									"name": "Retrieve an account details - 404 - Not Found",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 404 - Retrieve an account details\", () => {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"\r",
+													"\r",
+													"pm.test(\"Check that response object have all required keys\", () => {\r",
+													"  pm.expect(responseJson).to.be.an('object')\r",
+													"  .that.has.all.keys('id', 'message');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check that response object have required error message\", () => {\r",
+													"    pm.expect(responseJson.message).to.include(\"Could not find resource with uid\");\r",
+													"});\r",
+													"\r",
+													"\r",
+													"/*\r",
+													"pm.test(\"Check that ID of the product from response is correct\", () => {\r",
+													"    pm.expect(responseJson.id).to.include(\"id_string\");\r",
+													"});\r",
+													"*/"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "x-mock-header",
+												"value": "not-found",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/accounts/{{accountId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"accounts",
+												"{{accountId}}"
+											]
+										},
+										"description": "Retrieve the details of a single specific account. You must pass a valid UID for the account in the query parameter accountId."
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			],
+			"description": "An account is a ledger of transactions associated with a customer. Accounts can be held by either a business or a set of people. Each account has a unique accountId which can be used to reference it."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://lvox8eeyv0.execute-api.eu-central-1.amazonaws.com/dev"
+		},
+		{
+			"key": "productId",
+			"value": "570ecbb7-320f-eb6b-9174-e6ca4c4c38af"
+		},
+		{
+			"key": "AccountProductID",
+			"value": "GI0O8wlLdSgAKHVLTO41kwFEVVZVsjjQoPhN-VylW8kZ"
+		},
+		{
+			"key": "personId",
+			"value": "o0XCd5-VeSAAIHmV6aTSsQFUVVZVTj_2ttZG28ohlxGi"
+		},
+		{
+			"key": "companyId",
+			"value": "52a8e106-6893-46b4-a792-53840a2880c6"
+		},
+		{
+			"key": "accountOffset",
+			"value": "-37524666"
+		},
+		{
+			"key": "accountLimit",
+			"value": "-37524666"
+		},
+		{
+			"key": "accountId",
+			"value": "xUIODww7SeAA4Ek7Wpf9AQFXVVZV8g_vgQ9GyVlZWxXE"
+		}
+	]
+}

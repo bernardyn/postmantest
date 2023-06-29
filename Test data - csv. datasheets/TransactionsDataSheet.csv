@@ -1,0 +1,7 @@
+fromBookingDateTime,toBookingDateTime,minAmount,maxAmount,transactionsLimit,transactionsOffset,spendingCategory,creditDebitIndicator,transactionsStatus
+"1979-11-08T05:44:41.293Z	",1980-02-08T05:44:41.293Z,0,100,0,0,reprehenderit,reprehenderit,reprehenderit
+"2000-01-01T05:44:41.293Z	",2000-03-01T05:44:41.293Z,100,0,1,1,reprehenderit,reprehenderit,reprehenderit
+"2011-07-01T05:44:41.293Z	",2011-08-01T12:44:41.293Z,9.22E+18,9.22E+18,50,20,reprehenderit,reprehenderit,reprehenderit
+"2011-07-01T05:44:41.293Z	",2011-08-11T23:44:41.293Z,1000,5.34E+12,32,100,reprehenderit,reprehenderit,reprehenderit
+2011-07-01T05:44:41.293Z,2011-08-11T23:44:41.293Z,5.34E+12,9.22E+17,99,2147483647,reprehenderit,reprehenderit,reprehenderit
+"2000-01-01T05:44:41.293Z	",2000-03-01T05:44:41.293Z,0,9.22E+18,100,100000,reprehenderit,reprehenderit,reprehenderit
