@@ -40,7 +40,7 @@ jobs:
       - name: Accounts
         uses: matt-ball/newman-action@v1.0.4
         with:
-            collection: Accounts.postman_collection.json
+            collection: Accounts/Accounts.postman_collection.json
             environment: workspace.postman_globals.json
-            iterationData: AccountsDataSheet.csv
+            iterationData: Test data - csv. datasheets/AccountsDataSheet.csv
 
