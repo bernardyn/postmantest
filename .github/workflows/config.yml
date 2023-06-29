@@ -42,5 +42,5 @@ jobs:
         with:
             collection: Accounts.postman_collection.json
             environment: workspace.postman_globals.json
-            data: Test\ data\ -\ csv.\ datasheets/AccountsDataSheet.csv
+            data: AccountsDataSheet.csv
 
