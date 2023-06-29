@@ -30,8 +30,17 @@ jobs:
         run: echo Hello, world!
 
       # Runs a set of commands using the runners shell
-      - name: Newman Action
+      - name: Beneficiaries
         uses: matt-ball/newman-action@v1.0.4
         with:
             collection: Beneficiaries/Beneficiaries.postman_collection.json
             environment: workspace.postman_globals.json
+            
+      # Runs a set of commands using the runners shell
+      - name: Accounts
+        uses: matt-ball/newman-action@v1.0.4
+        with:
+            collection: Accounts.postman_collection.json
+            environment: workspace.postman_globals.json
+            data: Test\ data\ -\ csv.\ datasheets/AccountsDataSheet.csv
+
