@@ -11,7 +11,7 @@
 			"name": "Create beneficiary",
 			"item": [
 				{
-					"name": "Happy paths",
+					"name": "Happy paths1",
 					"item": [
 						{
 							"name": "create beneficiary - 200",
