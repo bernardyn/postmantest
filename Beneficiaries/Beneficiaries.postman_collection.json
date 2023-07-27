@@ -528,7 +528,7 @@
 			]
 		},
 		{
-			"name": "Get beneficiary-andrzej",
+			"name": "Happy paths",
 			"item": [
 				{
 					"name": "get beneficiary - 200",
