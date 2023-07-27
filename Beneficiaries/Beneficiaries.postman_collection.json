@@ -1,147 +1,686 @@
 {
 	"info": {
-		"_postman_id": "255efa0f-5a57-4cf9-a9bf-3f7cbf60212b",
+		"_postman_id": "a4fd3aca-62c8-4cfb-9fc3-4a2121f161b2",
 		"name": "Beneficiaries",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "2157018",
-		"_collection_link": "https://grey-moon-7219.postman.co/workspace/idea-andrzej~8c5f6526-d001-4cf1-9f7f-c0595b3ff20a/collection/2157018-255efa0f-5a57-4cf9-a9bf-3f7cbf60212b?action=share&creator=2157018&source=collection_link"
+		"_collection_link": "https://grey-moon-7219.postman.co/workspace/idea-dev~59e91c64-869c-4423-842a-740c5a96176b/collection/2157018-a4fd3aca-62c8-4cfb-9fc3-4a2121f161b2?action=share&creator=2157018&source=collection_link"
 	},
 	"item": [
 		{
-			"name": "Create beneficiary-andrzej",
+			"name": "Create beneficiary",
 			"item": [
 				{
-					"name": "create beneficiary - 200",
-					"event": [
+					"name": "Happy paths",
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"const responseJson = pm.response.json();\r",
-									"\r",
-									"pm.test(\"1 Status code is 200 - OK\", () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"    pm.response.to.have.status(\"OK\");\r",
-									"});\r",
-									"\r",
-									"pm.test(\"2 Check that response object data have all required keys\", () => {\r",
-									"let requiredKeys = [\r",
-									"    'beneficiaryId',\r",
-									"    'accountId',\r",
-									"    'type',\r",
-									"    'name',\r",
-									"    'createdAt']\r",
-									"\r",
-									"    requiredKeys.forEach(key =>{\r",
-									"        if(responseJson.hasOwnProperty(key) == true)\r",
-									"                {\r",
-									"                pm.expect(responseJson.hasOwnProperty(key)).to.be.true\r",
-									"                }\r",
-									"        else{\r",
-									"                console.log(key+' is required but not found in response')\r",
-									"                pm.expect(responseJson.hasOwnProperty(key)).to.be.true\r",
-									"                }\r",
-									"         })\r",
-									"});\r",
-									"\r",
-									"pm.test(\"3 Check that response object has correct field types\", () => {\r",
-									"        pm.expect(responseJson.beneficiaryId).to.be.a(\"string\");\r",
-									"        pm.expect(responseJson.accountId).to.be.a(\"string\");\r",
-									"        pm.expect(responseJson.type).to.be.a(\"string\");\r",
-									"        pm.expect(responseJson.name).to.be.a(\"string\");\r",
-									"        pm.expect(responseJson.createdAt).to.be.a(\"string\");\r",
-									"});\r",
-									"\r",
-									"pm.test(\"4 Check address has required fields\", () => {\r",
-									"let requiredKeys = [\r",
-									"    'addressLine1', \r",
-									"    'stateOrProvince', \r",
-									"    'postcode'\r",
-									"]\r",
-									"requiredKeys.forEach(key =>{\r",
-									"if(responseJson.address.hasOwnProperty(key) == true)\r",
-									"                {\r",
-									"                pm.expect(responseJson.address.hasOwnProperty(key)).to.be.true\r",
-									"                }\r",
-									"        else{\r",
-									"                console.log(key+' is required but not found in response')\r",
-									"                pm.expect(responseJson.address.hasOwnProperty(key)).to.be.true\r",
-									"                }\r",
-									"         })\r",
-									"});\r",
-									"\r",
-									"pm.test(\"5 Check that address has correct field types\", () => {\r",
-									"        pm.expect(responseJson.address.addressLine1).to.be.a(\"string\");\r",
-									"        pm.expect(responseJson.address.stateOrProvince).to.be.a(\"string\");\r",
-									"        pm.expect(responseJson.address.postcode).to.be.a(\"string\");\r",
-									"});\r",
-									"\r",
-									"pm.test(\"6 Check that type fields includes expected values\", () => {\r",
-									"        pm.expect(responseJson.type).to.be.oneOf([\"BUSINESS\",\"INDIVIDUAL\"]);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"7 Check that beneficiaryId has pattern\", () => {\r",
-									"        pm.expect(responseJson.accountId).to.match\r",
-									"        (/^@?(?:[A-Za-z0-9\\-_]{4})*(?:[A-Za-z0-9\\-_]{2}==|[A-Za-z0-9-_]{3}=)?$/);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"8 Check that accountID has pattern\", () => {\r",
-									"        pm.expect(responseJson.accountId).to.match\r",
-									"        (/^@?(?:[A-Za-z0-9\\-_]{4})*(?:[A-Za-z0-9\\-_]{2}==|[A-Za-z0-9-_]{3}=)?$/);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{   \n    \"type\": \"INDIVIDUAL\",\n    \"name\": \"Andrzej tester\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"name": "create beneficiary - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseJson = pm.response.json();\r",
+											"\r",
+											"pm.test(\"1 Status code is 200 - OK\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.response.to.have.status(\"OK\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"2 Check that response object data have all required keys\", () => {\r",
+											"let requiredKeys = [\r",
+											"    'beneficiaryId',\r",
+											"    'accountId',\r",
+											"    'type',\r",
+											"    'name',\r",
+											"    'createdAt']\r",
+											"\r",
+											"    requiredKeys.forEach(key =>{\r",
+											"        if(responseJson.hasOwnProperty(key) == true)\r",
+											"                {\r",
+											"                pm.expect(responseJson.hasOwnProperty(key)).to.be.true\r",
+											"                }\r",
+											"        else{\r",
+											"                console.log(key+' is required but not found in response')\r",
+											"                pm.expect(responseJson.hasOwnProperty(key)).to.be.true\r",
+											"                }\r",
+											"         })\r",
+											"});\r",
+											"\r",
+											"pm.test(\"3 Check that response object has correct field types\", () => {\r",
+											"        pm.expect(responseJson.beneficiaryId).to.be.a(\"string\");\r",
+											"        pm.expect(responseJson.accountId).to.be.a(\"string\");\r",
+											"        pm.expect(responseJson.type).to.be.a(\"string\");\r",
+											"        pm.expect(responseJson.name).to.be.a(\"string\");\r",
+											"        pm.expect(responseJson.createdAt).to.be.a(\"string\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"4 Check address has required fields\", () => {\r",
+											"let requiredKeys = [\r",
+											"    'addressLine1', \r",
+											"    'stateOrProvince', \r",
+											"    'postcode'\r",
+											"]\r",
+											"requiredKeys.forEach(key =>{\r",
+											"if(responseJson.address.hasOwnProperty(key) == true)\r",
+											"                {\r",
+											"                pm.expect(responseJson.address.hasOwnProperty(key)).to.be.true\r",
+											"                }\r",
+											"        else{\r",
+											"                console.log(key+' is required but not found in response')\r",
+											"                pm.expect(responseJson.address.hasOwnProperty(key)).to.be.true\r",
+											"                }\r",
+											"         })\r",
+											"});\r",
+											"\r",
+											"pm.test(\"5 Check that address has correct field types\", () => {\r",
+											"        pm.expect(responseJson.address.addressLine1).to.be.a(\"string\");\r",
+											"        pm.expect(responseJson.address.stateOrProvince).to.be.a(\"string\");\r",
+											"        pm.expect(responseJson.address.postcode).to.be.a(\"string\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"6 Check that type fields includes expected values\", () => {\r",
+											"        pm.expect(responseJson.type).to.be.oneOf([\"BUSINESS\",\"INDIVIDUAL\"]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"7 Check that beneficiaryId has pattern\", () => {\r",
+											"        pm.expect(responseJson.accountId).to.match\r",
+											"        (/^@?(?:[A-Za-z0-9\\-_]{4})*(?:[A-Za-z0-9\\-_]{2}==|[A-Za-z0-9-_]{3}=)?$/);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"8 Check that accountID has pattern\", () => {\r",
+											"        pm.expect(responseJson.accountId).to.match\r",
+											"        (/^@?(?:[A-Za-z0-9\\-_]{4})*(?:[A-Za-z0-9\\-_]{2}==|[A-Za-z0-9-_]{3}=)?$/);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
 								}
-							}
-						},
-						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries",
-							"host": [
-								"{{engineUrl}}"
 							],
-							"path": [
-								"accounts",
-								"{{accountId}}",
-								"beneficiaries"
-							]
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \n    \"type\": \"INDIVIDUAL\",\n    \"name\": \"Andrzej tester\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"accounts",
+										"{{accountId}}",
+										"beneficiaries"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "create beneficiary - 400",
+					"name": "Negative - testing",
+					"item": [
+						{
+							"name": "create beneficiary - 400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseJson = pm.response.json();\r",
+											"\r",
+											"pm.test(\"1 Status code is 400 - Bad request\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"    pm.response.to.have.status(\"Bad Request\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"2 Check that response object data have all required keys\", () => {\r",
+											"let requiredKeys = [\r",
+											"    'id',\r",
+											"    'messages']\r",
+											"\r",
+											"    requiredKeys.forEach(key =>{\r",
+											"        if(responseJson.hasOwnProperty(key) == true)\r",
+											"                {\r",
+											"                pm.expect(responseJson.hasOwnProperty(key)).to.be.true\r",
+											"                }\r",
+											"        else{\r",
+											"                console.log(key+' is required but not found in response')\r",
+											"                pm.expect(responseJson.hasOwnProperty(key)).to.be.true\r",
+											"                }\r",
+											"         })\r",
+											"});\r",
+											"\r",
+											"pm.test(\"3 Check that response object has correct field types\", () => {\r",
+											"        pm.expect(responseJson.id).to.be.a(\"string\");\r",
+											"        pm.expect(responseJson.messages).to.be.a(\"array\");\r",
+											"    \r",
+											"});\r",
+											"\r",
+											"pm.test(\"4 Check message has required fields and type\", () => {\r",
+											"let requiredKeys = [\r",
+											"    'message']\r",
+											"\r",
+											"requiredKeys.forEach(key =>{\r",
+											"         responseJson.messages.forEach(elem =>{\r",
+											"            if(elem.hasOwnProperty(key) == true)\r",
+											"                {\r",
+											"                pm.expect(elem.hasOwnProperty(key)).to.be.true\r",
+											"                pm.expect(elem.message).to.be.a(\"string\")\r",
+											"                }\r",
+											"            else{\r",
+											"                console.log(key+' is required but not found in response')\r",
+											"                pm.expect(elem.hasOwnProperty(key)).to.be.true\r",
+											"                }\r",
+											"         })\r",
+											"    })\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-mock-header",
+										"value": "invalid-request",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \n    \"type\": \"INDIVIDUAL\",\n    \"name\": \"Andrzej tester\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"accounts",
+										"{{accountId}}",
+										"beneficiaries"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create beneficiary - 403",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseJson = pm.response.json();\r",
+											"\r",
+											"pm.test(\"1 Status code is 403 - Forbidden\", () => {\r",
+											"    pm.response.to.have.status(403);\r",
+											"    pm.response.to.have.status(\"Forbidden\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"2 Check that response object data have all required keys\", () => {\r",
+											"let requiredKeys = [\r",
+											"    'id',\r",
+											"    'message']\r",
+											"\r",
+											"    requiredKeys.forEach(key =>{\r",
+											"        if(responseJson.hasOwnProperty(key) == true)\r",
+											"                {\r",
+											"                pm.expect(responseJson.hasOwnProperty(key)).to.be.true\r",
+											"                }\r",
+											"        else{\r",
+											"                console.log(key+' is required but not found in response')\r",
+											"                pm.expect(responseJson.hasOwnProperty(key)).to.be.true\r",
+											"                }\r",
+											"         })\r",
+											"});\r",
+											"\r",
+											"pm.test(\"3 Check that response object has correct field types\", () => {\r",
+											"        pm.expect(responseJson.id).to.be.a(\"string\");\r",
+											"        pm.expect(responseJson.message).to.be.a(\"string\");\r",
+											"    \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-mock-header",
+										"value": "unauthorized",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \n    \"type\": \"INDIVIDUAL\",\n    \"name\": \"Andrzej tester\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"accounts",
+										"{{accountId}}",
+										"beneficiaries"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create beneficiary - 404",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseJson = pm.response.json();\r",
+											"\r",
+											"pm.test(\"1 Status code is 404 - \", () => {\r",
+											"    pm.response.to.have.status(404);\r",
+											"    pm.response.to.have.status(\"Not Found\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"2 Check that response object data have all required keys\", () => {\r",
+											"let requiredKeys = [\r",
+											"    'id',\r",
+											"    'message']\r",
+											"\r",
+											"    requiredKeys.forEach(key =>{\r",
+											"        if(responseJson.hasOwnProperty(key) == true)\r",
+											"                {\r",
+											"                pm.expect(responseJson.hasOwnProperty(key)).to.be.true\r",
+											"                }\r",
+											"        else{\r",
+											"                console.log(key+' is required but not found in response')\r",
+											"                pm.expect(responseJson.hasOwnProperty(key)).to.be.true\r",
+											"                }\r",
+											"         })\r",
+											"});\r",
+											"\r",
+											"pm.test(\"3 Check that response object has correct field types\", () => {\r",
+											"        pm.expect(responseJson.id).to.be.a(\"string\");\r",
+											"        pm.expect(responseJson.message).to.be.a(\"string\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-mock-header",
+										"value": "not-found",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \n    \"type\": \"INDIVIDUAL\",\n    \"name\": \"Andrzej tester\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"accounts",
+										"{{accountId}}",
+										"beneficiaries"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create beneficiary - 500",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseJson = pm.response.json();\r",
+											"\r",
+											"pm.test(\"1 Status code is 500 - \", () => {\r",
+											"    pm.response.to.have.status(500);\r",
+											"    pm.response.to.have.status(\"Internal Server Error\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"2 Check that response object data have all required keys\", () => {\r",
+											"let requiredKeys = [\r",
+											"    'id',\r",
+											"    'message']\r",
+											"\r",
+											"    requiredKeys.forEach(key =>{\r",
+											"        if(responseJson.hasOwnProperty(key) == true)\r",
+											"                {\r",
+											"                pm.expect(responseJson.hasOwnProperty(key)).to.be.true\r",
+											"                }\r",
+											"        else{\r",
+											"                console.log(key+' is required but not found in response')\r",
+											"                pm.expect(responseJson.hasOwnProperty(key)).to.be.true\r",
+											"                }\r",
+											"         })\r",
+											"});\r",
+											"\r",
+											"pm.test(\"3 Check that response object has correct field types\", () => {\r",
+											"        pm.expect(responseJson.id).to.be.a(\"string\");\r",
+											"        pm.expect(responseJson.message).to.be.a(\"string\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-mock-header",
+										"value": "internal-server-error",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \n    \"type\": \"INDIVIDUAL\",\n    \"name\": \"Andrzej tester\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"accounts",
+										"{{accountId}}",
+										"beneficiaries"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Get beneficiary-andrzej",
+			"item": [
+				{
+					"name": "Happy paths",
+					"item": [
+						{
+							"name": "get beneficiary - 200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseJson = pm.response.json();\r",
+											"\r",
+											"pm.test(\"1 Status code is 200 - OK\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.response.to.have.status(\"OK\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"2 Check that response object data have all required keys\", () => {\r",
+											"let requiredKeys = [\r",
+											"    'beneficiaryId',\r",
+											"    'accountId',\r",
+											"    'type',\r",
+											"    'name',\r",
+											"    'createdAt']\r",
+											"\r",
+											"    requiredKeys.forEach(key =>{\r",
+											"        if(responseJson.hasOwnProperty(key) == true)\r",
+											"                {\r",
+											"                pm.expect(responseJson.hasOwnProperty(key)).to.be.true\r",
+											"                }\r",
+											"        else{\r",
+											"                console.log(key+' is required but not found in response')\r",
+											"                pm.expect(responseJson.hasOwnProperty(key)).to.be.true\r",
+											"                }\r",
+											"         })\r",
+											"});\r",
+											"\r",
+											"pm.test(\"3 Check that response object has correct field types\", () => {\r",
+											"        pm.expect(responseJson.beneficiaryId).to.be.a(\"string\");\r",
+											"        pm.expect(responseJson.accountId).to.be.a(\"string\");\r",
+											"        pm.expect(responseJson.type).to.be.a(\"string\");\r",
+											"        pm.expect(responseJson.name).to.be.a(\"string\");\r",
+											"        pm.expect(responseJson.createdAt).to.be.a(\"string\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"4 Check address has required fields\", () => {\r",
+											"let requiredKeys = [\r",
+											"    'addressLine1', \r",
+											"    'stateOrProvince', \r",
+											"    'postcode'\r",
+											"]\r",
+											"requiredKeys.forEach(key =>{\r",
+											"if(responseJson.address.hasOwnProperty(key) == true)\r",
+											"                {\r",
+											"                pm.expect(responseJson.address.hasOwnProperty(key)).to.be.true\r",
+											"                }\r",
+											"        else{\r",
+											"                console.log(key+' is required but not found in response')\r",
+											"                pm.expect(responseJson.address.hasOwnProperty(key)).to.be.true\r",
+											"                }\r",
+											"         })\r",
+											"});\r",
+											"\r",
+											"pm.test(\"5 Check that address has correct field types\", () => {\r",
+											"        pm.expect(responseJson.address.addressLine1).to.be.a(\"string\");\r",
+											"        pm.expect(responseJson.address.stateOrProvince).to.be.a(\"string\");\r",
+											"        pm.expect(responseJson.address.postcode).to.be.a(\"string\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"6 Check that type fields includes expected values\", () => {\r",
+											"        pm.expect(responseJson.type).to.be.oneOf([\"BUSINESS\",\"INDIVIDUAL\"]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"7 Check that beneficiaryId has pattern\", () => {\r",
+											"        pm.expect(responseJson.accountId).to.match\r",
+											"        (/^@?(?:[A-Za-z0-9\\-_]{4})*(?:[A-Za-z0-9\\-_]{2}==|[A-Za-z0-9-_]{3}=)?$/);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"8 Check that accountID has pattern\", () => {\r",
+											"        pm.expect(responseJson.accountId).to.match\r",
+											"        (/^@?(?:[A-Za-z0-9\\-_]{4})*(?:[A-Za-z0-9\\-_]{2}==|[A-Za-z0-9-_]{3}=)?$/);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries/{{beneficiaryId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"accounts",
+										"{{accountId}}",
+										"beneficiaries",
+										"{{beneficiaryId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "get beneficiary - 400",
 					"event": [
 						{
 							"listen": "test",
@@ -209,8 +748,11 @@
 							}
 						}
 					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -230,7 +772,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \n    \"type\": \"INDIVIDUAL\",\n    \"name\": \"Andrzej tester\"\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -238,21 +780,22 @@
 							}
 						},
 						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries",
+							"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries/{{beneficiaryId}}",
 							"host": [
-								"{{engineUrl}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"accounts",
 								"{{accountId}}",
-								"beneficiaries"
+								"beneficiaries",
+								"{{beneficiaryId}}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "create beneficiary - 403",
+					"name": "get beneficiary - 403",
 					"event": [
 						{
 							"listen": "test",
@@ -301,8 +844,11 @@
 							}
 						}
 					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -322,7 +868,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \n    \"type\": \"INDIVIDUAL\",\n    \"name\": \"Andrzej tester\"\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -330,112 +876,22 @@
 							}
 						},
 						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries",
+							"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries/{{beneficiaryId}}",
 							"host": [
-								"{{engineUrl}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"accounts",
 								"{{accountId}}",
-								"beneficiaries"
+								"beneficiaries",
+								"{{beneficiaryId}}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "create beneficiary - 404",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"const responseJson = pm.response.json();\r",
-									"\r",
-									"pm.test(\"1 Status code is 404 - \", () => {\r",
-									"    pm.response.to.have.status(404);\r",
-									"    pm.response.to.have.status(\"Not Found\");\r",
-									"});\r",
-									"\r",
-									"pm.test(\"2 Check that response object data have all required keys\", () => {\r",
-									"let requiredKeys = [\r",
-									"    'id',\r",
-									"    'message']\r",
-									"\r",
-									"    requiredKeys.forEach(key =>{\r",
-									"        if(responseJson.hasOwnProperty(key) == true)\r",
-									"                {\r",
-									"                pm.expect(responseJson.hasOwnProperty(key)).to.be.true\r",
-									"                }\r",
-									"        else{\r",
-									"                console.log(key+' is required but not found in response')\r",
-									"                pm.expect(responseJson.hasOwnProperty(key)).to.be.true\r",
-									"                }\r",
-									"         })\r",
-									"});\r",
-									"\r",
-									"pm.test(\"3 Check that response object has correct field types\", () => {\r",
-									"        pm.expect(responseJson.id).to.be.a(\"string\");\r",
-									"        pm.expect(responseJson.message).to.be.a(\"string\");\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "x-mock-header",
-								"value": "not-found",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{   \n    \"type\": \"INDIVIDUAL\",\n    \"name\": \"Andrzej tester\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries",
-							"host": [
-								"{{engineUrl}}"
-							],
-							"path": [
-								"accounts",
-								"{{accountId}}",
-								"beneficiaries"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "create beneficiary - 500",
+					"name": "get beneficiary - 500",
 					"event": [
 						{
 							"listen": "test",
@@ -483,8 +939,11 @@
 							}
 						}
 					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -504,159 +963,6 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \n    \"type\": \"INDIVIDUAL\",\n    \"name\": \"Andrzej tester\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries",
-							"host": [
-								"{{engineUrl}}"
-							],
-							"path": [
-								"accounts",
-								"{{accountId}}",
-								"beneficiaries"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Happy paths",
-			"item": [
-				{
-					"name": "get all beneficiaries - 200 -hahah",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"const responseJson = pm.response.json();\r",
-									"\r",
-									"pm.test(\"1 Status code is 200 - OK\", () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"    pm.response.to.have.status(\"OK\");\r",
-									"});\r",
-									"\r",
-									"pm.test(\"2 Check that response object data have all required keys\", () => {\r",
-									"let requiredKeys = [\r",
-									"    'beneficiaryId',\r",
-									"    'accountId',\r",
-									"    'type',\r",
-									"    'name',\r",
-									"    'createdAt']\r",
-									"\r",
-									"     requiredKeys.forEach(key =>{\r",
-									"         responseJson.beneficiaries.forEach(elem =>{\r",
-									"            if(elem.hasOwnProperty(key) == true)\r",
-									"                {\r",
-									"                pm.expect(elem.hasOwnProperty(key)).to.be.true\r",
-									"                }\r",
-									"            else{\r",
-									"                console.log(key+' is required but not found in response')\r",
-									"                pm.expect(elem.hasOwnProperty(key)).to.be.true\r",
-									"                }\r",
-									"         })\r",
-									"    })\r",
-									"});\r",
-									"\r",
-									"pm.test(\"3 Check that response object has correct field types\", () => {\r",
-									"    responseJson.beneficiaries.forEach(elem =>{\r",
-									"        pm.expect(elem.beneficiaryId).to.be.a(\"string\");\r",
-									"        pm.expect(elem.accountId).to.be.a(\"string\");\r",
-									"        pm.expect(elem.type).to.be.a(\"string\");\r",
-									"        pm.expect(elem.name).to.be.a(\"string\");\r",
-									"        pm.expect(elem.createdAt).to.be.a(\"string\");\r",
-									"    })\r",
-									"});\r",
-									"\r",
-									"//address\r",
-									"pm.test(\"4 Check address has required fields\", () => {\r",
-									"let requiredKeys = [\r",
-									"    'addressLine1', \r",
-									"    'stateOrProvince', \r",
-									"    'postcode'\r",
-									"]\r",
-									"requiredKeys.forEach(key =>{\r",
-									"         responseJson.beneficiaries.forEach(elem =>{\r",
-									"            if(elem.address.hasOwnProperty(key) == true)\r",
-									"                {\r",
-									"                pm.expect(elem.address.hasOwnProperty(key)).to.be.true\r",
-									"                }\r",
-									"            else{\r",
-									"                console.log(key+' is required but not found in response')\r",
-									"                pm.expect(elem.address.hasOwnProperty(key)).to.be.true\r",
-									"                }\r",
-									"         })\r",
-									"    })\r",
-									"});\r",
-									"\r",
-									"pm.test(\"5 Check that address has correct field types\", () => {\r",
-									"    responseJson.beneficiaries.forEach(elem =>{\r",
-									"        pm.expect(elem.address.addressLine1).to.be.a(\"string\");\r",
-									"        pm.expect(elem.address.stateOrProvince).to.be.a(\"string\");\r",
-									"        pm.expect(elem.address.postcode).to.be.a(\"string\");\r",
-									"    })\r",
-									"});\r",
-									"\r",
-									"pm.test(\"6 Check that type fields includes expected values\", () => {\r",
-									"    responseJson.beneficiaries.forEach(elem =>{\r",
-									"        pm.expect(elem.type).to.be.oneOf([\"BUSINESS\",\"INDIVIDUAL\"]);\r",
-									"    })\r",
-									"});\r",
-									"\r",
-									"pm.test(\"7 Check that beneficiaryId has pattern\", () => {\r",
-									"    responseJson.beneficiaries.forEach(elem =>{\r",
-									"        pm.expect(elem.beneficiaryId).to.match\r",
-									"        (/^@?(?:[A-Za-z0-9\\-_]{4})*(?:[A-Za-z0-9\\-_]{2}==|[A-Za-z0-9-_]{3}=)?$/);\r",
-									"    })\r",
-									"});\r",
-									"\r",
-									"pm.test(\"8 Check that accountID has pattern\", () => {\r",
-									"    responseJson.beneficiaries.forEach(elem =>{\r",
-									"        pm.expect(elem.accountId).to.match\r",
-									"        (/^@?(?:[A-Za-z0-9\\-_]{4})*(?:[A-Za-z0-9\\-_]{2}==|[A-Za-z0-9-_]{3}=)?$/);\r",
-									"    })\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
 							"raw": "",
 							"options": {
 								"raw": {
@@ -665,14 +971,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries",
+							"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries/{{beneficiaryId}}",
 							"host": [
-								"{{engineUrl}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"accounts",
 								"{{accountId}}",
-								"beneficiaries"
+								"beneficiaries",
+								"{{beneficiaryId}}"
 							]
 						}
 					},
@@ -818,9 +1125,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries",
+							"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries",
 							"host": [
-								"{{engineUrl}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"accounts",
@@ -932,9 +1239,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries",
+							"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries",
 							"host": [
-								"{{engineUrl}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"accounts",
@@ -1027,9 +1334,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries",
+							"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries",
 							"host": [
-								"{{engineUrl}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"accounts",
@@ -1121,9 +1428,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries",
+							"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries",
 							"host": [
-								"{{engineUrl}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"accounts",
@@ -1256,9 +1563,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries/{{beneficiaryId}}",
+							"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries/{{beneficiaryId}}",
 							"host": [
-								"{{engineUrl}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"accounts",
@@ -1368,14 +1675,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries{{beneficiaryId}}",
+							"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries/{{beneficiaryId}}",
 							"host": [
-								"{{engineUrl}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"accounts",
 								"{{accountId}}",
-								"beneficiaries{{beneficiaryId}}"
+								"beneficiaries",
+								"{{beneficiaryId}}"
 							]
 						}
 					},
@@ -1460,14 +1768,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries{{beneficiaryId}}",
+							"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries/{{beneficiaryId}}",
 							"host": [
-								"{{engineUrl}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"accounts",
 								"{{accountId}}",
-								"beneficiaries{{beneficiaryId}}"
+								"beneficiaries",
+								"{{beneficiaryId}}"
 							]
 						}
 					},
@@ -1551,14 +1860,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries{{beneficiaryId}}",
+							"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries/{{beneficiaryId}}",
 							"host": [
-								"{{engineUrl}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"accounts",
 								"{{accountId}}",
-								"beneficiaries{{beneficiaryId}}"
+								"beneficiaries",
+								"{{beneficiaryId}}"
 							]
 						}
 					},
@@ -1690,9 +2000,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries/{{beneficiaryId}}/archive",
+							"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries/{{beneficiaryId}}/archive",
 							"host": [
-								"{{engineUrl}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"accounts",
@@ -1803,14 +2113,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries{{beneficiaryId}}/archive",
+							"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries/{{beneficiaryId}}/archive",
 							"host": [
-								"{{engineUrl}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"accounts",
 								"{{accountId}}",
-								"beneficiaries{{beneficiaryId}}",
+								"beneficiaries",
+								"{{beneficiaryId}}",
 								"archive"
 							]
 						}
@@ -1896,14 +2207,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries{{beneficiaryId}}/archive",
+							"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries/{{beneficiaryId}}/archive",
 							"host": [
-								"{{engineUrl}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"accounts",
 								"{{accountId}}",
-								"beneficiaries{{beneficiaryId}}",
+								"beneficiaries",
+								"{{beneficiaryId}}",
 								"archive"
 							]
 						}
@@ -1988,14 +2300,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{engineUrl}}/accounts/{{accountId}}/beneficiaries{{beneficiaryId}}/archive",
+							"raw": "{{baseUrl}}/accounts/{{accountId}}/beneficiaries/{{beneficiaryId}}/archive",
 							"host": [
-								"{{engineUrl}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"accounts",
 								"{{accountId}}",
-								"beneficiaries{{beneficiaryId}}",
+								"beneficiaries",
+								"{{beneficiaryId}}",
 								"archive"
 							]
 						}
