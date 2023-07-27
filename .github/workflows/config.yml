@@ -41,7 +41,7 @@ jobs:
     # Run the POSTMAN collection
     - name: Run POSTMAN collection
       run: |
-       newman run Beneficiaries/Beneficiaries.postman_collection.json --folder "Happy paths" -g workspace.postman_globals.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/runreport1.html
+       newman run Beneficiaries/Beneficiaries.postman_collection.json --folder "Happy paths" -g workspace.postman_globals.json
 
     # Upload the contents of Test Results directory to workspace
     - name: Output the run Details
