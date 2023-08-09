@@ -1,0 +1,101 @@
+# This is a basic workflow to help you get started with Actions
+
+name: dev
+
+env:
+  # Setting an environment variable with the value of a configuration variable
+  dev: ${{ vars.ENV_CONTEXT_VAR }}
+
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
+# jobs:
+#   test-api:
+#     runs-on: ubuntu-latest
+#     steps:
+#     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#     - uses: actions/checkout@v2
+      
+#     # INstall Node on the runner
+#     - name: Install Node
+#       uses: actions/setup-node@v1
+#       with: 
+#         node-version: '12.x'
+    
+#     # Install the newman command line utility and also install the html extra reporter
+#     - name: Install newman
+#       run: |
+#        npm install -g newman
+#        npm install -g newman-reporter-htmlextra
+
+#     # Make directory to upload the test results
+#     - name: Make Directory for results
+#       run: mkdir -p testResults
+
+#     # Run the POSTMAN collection
+#     - name: Run POSTMAN collection
+#       run: |
+#        newman run Beneficiaries/Beneficiaries.postman_collection.json --folder "Happy paths" -g workspace.postman_globals.json
+
+#     # Upload the contents of Test Results directory to workspace
+#     - name: Output the run Details
+#       uses: actions/upload-artifact@v2
+#       with: 
+#        name: RunReports
+#        path: testResults
+jobs:
+  # This workflow contains a single job called "build"
+  Beneficiaries-tests:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Beneficiaries
+        uses: matt-ball/newman-action@v1.0.4
+        with:
+            collection: Beneficiaries/Beneficiaries.postman_collection.json
+            environment: workspace.postman_globals.json
+            folder: '["Happy paths1", "Happy paths"]'
+     
+#   Accounts-tests:
+#     # The type of runner that the job will run on
+#     runs-on: ubuntu-latest
+
+#     # Steps represent a sequence of tasks that will be executed as part of the job
+#     steps:
+#       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#       - uses: actions/checkout@v3
+
+#       # Runs a single command using the runners shell
+#       - name: Run a one-line script
+#         run: echo Hello, world!
+            
+#       # Runs a set of commands using the runners shell
+#       - name: Accounts
+#         uses: matt-ball/newman-action@v1.0.4
+#         with:
+#             collection: Accounts/Accounts.postman_collection.json
+#             environment: workspace.postman_globals.json
+#             iterationData: Test data - csv. datasheets/AccountsDataSheet.csv
+            
+    
