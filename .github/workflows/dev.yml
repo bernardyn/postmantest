@@ -74,7 +74,7 @@ jobs:
         uses: matt-ball/newman-action@v1.0.4
         with:
             collection: Beneficiaries/Beneficiaries.postman_collection.json
-            environment: ${{ vars.workspace }}
+            environment: ${{ env.workspace }}
             # envVar: '[{ "key": "baseUrl", "value": "test.pl" }]'
             folder: '["Happy paths1", "Happy paths"]'
      
