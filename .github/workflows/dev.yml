@@ -4,7 +4,7 @@ name: dev
 
 env:
   # Setting an environment variable with the value of a configuration variable
-  dev: ${{ vars.ENV_CONTEXT_VAR }}
+  baseUrl: "test.pl"
 
 
 # Controls when the workflow will run
@@ -74,7 +74,8 @@ jobs:
         uses: matt-ball/newman-action@v1.0.4
         with:
             collection: Beneficiaries/Beneficiaries.postman_collection.json
-            environment: workspace.postman_globals.json
+            # environment: workspace.postman_globals.json
+            envVar: '[{ "key": "baseUrl", "value": "${{ vars.baseUrl }}" }]'
             folder: '["Happy paths1", "Happy paths"]'
      
 #   Accounts-tests:
