@@ -75,7 +75,7 @@ jobs:
         with:
             collection: Beneficiaries/Beneficiaries.postman_collection.json
             environment: workspace.postman_globals.json
-            envVar: '[{ "key": "baseUrl", "value": ${{ vars.baseUrl }} }]'
+            envVar: '[{ "key": "baseUrl", "value": "test.pl" }]'
             folder: '["Happy paths1", "Happy paths"]'
      
 #   Accounts-tests:
