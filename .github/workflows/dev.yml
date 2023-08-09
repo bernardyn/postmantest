@@ -4,7 +4,7 @@ name: dev
 
 env:
   # Setting an environment variable with the value of a configuration variable
-  workspace: "workspace.postman_globals.json"
+  workspace: workspace.postman_globals.json
 
 
 # Controls when the workflow will run
